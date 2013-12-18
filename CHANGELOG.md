@@ -2,6 +2,10 @@ jenkins Cookbook CHANGELOG
 ==========================
 This file is used to list changes made in each version of the jenkins cookbook.
 
+v1.2.4
+### Improvements
+- Using node['jenkins']['server']['jvm_options'] when jenkins server is running in package mode (it was being used only in war mode)
+
 v1.2.2
 ------
 ### Bug

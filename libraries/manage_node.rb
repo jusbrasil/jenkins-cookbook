@@ -98,7 +98,7 @@ def jenkins_node_manage(args) # rubocop:disable MethodLength
     end
 
     launcher = %Q(new_ssh_launcher(["#{args[:host]}", #{args[:port]}, "#{args[:username]}", #{password},
-                                    "#{args[:private_key]}", "#{args[:jvm_options]}"] as Object[]))
+                                    "#{args[:private_key]}", "#{args[:jvm_options]}", null] as Object[]))
   end
 
   remote_fs = args[:remote_fs].gsub('\\', '\\\\\\') # C:\jenkins -> C:\\jenkins
@@ -122,7 +122,7 @@ props = []
 def new_ssh_launcher(args) {
   Jenkins.instance.pluginManager.getPlugin('ssh-slaves').classLoader.
     loadClass('hudson.plugins.sshslaves.SSHLauncher').
-      getConstructor([String, int, String, String, String, String] as Class[]).newInstance(args)
+      getConstructor([String, int, String, String, String, String, String] as Class[]).newInstance(args)
 }
 
 if (env != null) {

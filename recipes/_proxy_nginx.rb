@@ -32,6 +32,8 @@ template "#{node['nginx']['dir']}/htpasswd" do
   mode '0600'
 end
 
+jenkins_slaves = search(:node, "roles:#{node['jenkins']['slave_role']}")
+
 template "#{node['nginx']['dir']}/sites-available/jenkins.conf" do
   source      'nginx_jenkins.conf.erb'
   owner       'root'
@@ -45,7 +47,8 @@ template "#{node['nginx']['dir']}/sites-available/jenkins.conf" do
     :max_upload_size  => node['jenkins']['http_proxy']['client_max_body_size'],
     :redirect_http    => node['jenkins']['http_proxy']['ssl']['redirect_http'],
     :ssl_enabled      => node['jenkins']['http_proxy']['ssl']['enabled'],
-    :ssl_listen_ports => node['jenkins']['http_proxy']['ssl']['ssl_listen_ports']
+    :ssl_listen_ports => node['jenkins']['http_proxy']['ssl']['ssl_listen_ports'],
+    :jenkins_slaves   => jenkins_slaves
   )
 
   if File.exists?("#{node['nginx']['dir']}/sites-enabled/jenkins.conf")

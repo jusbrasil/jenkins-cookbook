@@ -64,6 +64,13 @@ server {
     auth_basic            "Restricted";
     auth_basic_user_file  htpasswd;
 <% end -%>
+
+<% @jenkins_slaves.each do |jenkins_slave| %>
+    allow <%= jenkins_slave['fqdn'] %>;
+  <% end %>
+
+    deny all;
+    satisfy any;
   }
 
   error_log         <%= node[:nginx][:log_dir] %>/jenkins-error.log;

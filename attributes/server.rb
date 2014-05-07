@@ -38,6 +38,7 @@ when 'debian'
   default['jenkins']['server']['plugins_dir_group'] = default['jenkins']['server']['user']
   default['jenkins']['server']['log_dir_group'] = 'adm'
   default['jenkins']['server']['ssh_dir_group'] = 'nogroup'
+  default['jenkins']['server']['repo'] = 'http://pkg.jenkins-ci.org/debian-stable'
 when 'rhel'
   default['jenkins']['server']['install_method'] = 'package'
   default['jenkins']['server']['group'] = default['jenkins']['server']['user']
